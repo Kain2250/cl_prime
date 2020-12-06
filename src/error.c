@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:26:20 by cwing             #+#    #+#             */
-/*   Updated: 2020/12/06 23:38:30 by kain2250         ###   ########.fr       */
+/*   Updated: 2020/12/07 00:56:02 by cwing            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ void 		print_error(char *message, int code)
 	}
 	ft_putchar_fd('\n', STDERR_FILENO);
 	exit(EXIT_FAILURE);
+}
+
+static void	cl_kernel_err(int code)
+{
+	if (code == CL_INVALID_PROGRAM)
+		print_error("CL: Invalid program", 0);
+	else if (code == CL_COMPILER_NOT_AVAILABLE)
+		print_error("CL: Compiler not avalible", 0);
+	else if (code == CL_INVALID_OPERATION)
+		print_error("CL: Invalid operation", 0);
+	else if (code == CL_BUILD_PROGRAM_FAILURE)
+		print_error("CL: Bild program failure", 0);
+	else if (code == CL_INVALID_BINARY)
+		print_error("CL: Invalid binary", 0);
+	else
+		print_error("CL: Xz wtf error", code);
 }
 
 void		cl_err(int code)
@@ -44,5 +60,5 @@ void		cl_err(int code)
 	else if (code == CL_OUT_OF_RESOURCES)
 		print_error("CL: Out of resources", 0);
 	else
-		print_error("CL: Xz wtf error", 0);
+		cl_kernel_err(code);
 }
