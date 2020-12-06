@@ -6,7 +6,7 @@
 /*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:52:35 by kain2250          #+#    #+#             */
-/*   Updated: 2020/12/06 20:35:29 by kain2250         ###   ########.fr       */
+/*   Updated: 2020/12/06 23:22:29 by kain2250         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void					init_cl(t_cl *cl);
 
 void					cl_err(int code);
 
+void					print_error(char *message, int code);
 #endif

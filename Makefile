@@ -6,7 +6,7 @@
 #    By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 17:56:24 by kain2250          #+#    #+#              #
-#    Updated: 2020/12/06 21:42:08 by kain2250         ###   ########.fr        #
+#    Updated: 2020/12/06 23:25:08 by kain2250         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cl_prime
 
 CC = clang
 CCFLAGS = -Wall -Wextra
-FLAGS = -O3
+FLAGS = -O2
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY = libft/
@@ -79,7 +79,6 @@ clean:
 
 
 fclean: clean
-	@rm -f $(LIBFT)
 	@rm -f $(NAME)
 	@printf "$(RED)[$(NAME)] Delete $(NAME) successfuly! [OK]\n$(RESET)"
 
