@@ -6,7 +6,7 @@
 #    By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 17:56:24 by kain2250          #+#    #+#              #
-#    Updated: 2020/12/06 20:38:29 by kain2250         ###   ########.fr        #
+#    Updated: 2020/12/06 20:52:00 by kain2250         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,19 @@ NAME = cl_prime
 CC = clang
 FLAGS_GISTAPO = -Wall -Wextra -Werror
 FLAGS = #$(FLAGS_GISTAPO)
-LIB_FLAGS = -lOpenCL -lft
+LIB_FLAGS := -lft
 
-LIBFT_DIR = libft
-LIBFT_INCLUDE_DIR = $(LIBFT_DIR)/includes
+# Флаги компиляции:
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LIB_FLAGS += -lOpenCL
+endif
+ifeq ($(UNAME_S),Darwin)
+	LIB_FLAGS += -framework OpenCL
+endif
+
+LIBFT_DIR = libft/
+LIBFT_INCLUDE_DIR = $(LIBFT_DIR)includes
 LIBS = -L $(LIBFT_DIR)
 
 INCLUDE_DIR = include/
@@ -41,15 +50,15 @@ OBJS = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
 all: $(NAME) 
 
-$(NAME): $(HEADERS) $(SRC) #$(OBJ_DIR) $(OBJS) 
+$(NAME): $(HEADERS) $(OBJ_DIR) $(OBJS) 
 	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(FLAGS) $(SRC) $(INCLUDES) $(LIBS) $(LIB_FLAGS) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(INCLUDES) $(LIBS) $(LIB_FLAGS) -o $(NAME)
 
-# $(OBJ_DIR):
-# 	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
-# $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
-# 	@$(CC) $(FLAGS) $(INCLUDES) $< -o $@
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)
