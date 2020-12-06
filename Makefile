@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+         #
+#    By: cwing <cwing@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 17:56:24 by kain2250          #+#    #+#              #
-#    Updated: 2020/12/06 23:25:08 by kain2250         ###   ########.fr        #
+#    Updated: 2020/12/06 23:59:01 by cwing            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ HEADERS_LIST = main.h
 SRC_DIRECTORY = ./src/
 SRC_LIST = error.c \
 		init.c \
+		get_file.c \
 		main.c
 SRC = $(addprefix $(SRC_DIRECTORY), $(SRC_LIST))
 
