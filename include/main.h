@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:52:35 by kain2250          #+#    #+#             */
-/*   Updated: 2020/12/06 19:13:08 by kain2250         ###   ########.fr       */
+/*   Updated: 2020/12/06 19:27:43 by cwing            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,8 @@ typedef struct			s_cl
 }						t_cl;
 
 void					init_cl(t_cl *cl);
+
+
+void					err_out(char *message, int code);
+
 #endif
