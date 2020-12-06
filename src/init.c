@@ -6,7 +6,7 @@
 /*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:11:13 by kain2250          #+#    #+#             */
-/*   Updated: 2020/12/06 23:26:07 by kain2250         ###   ########.fr       */
+/*   Updated: 2020/12/06 23:39:01 by kain2250         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	load_kernel(t_cl *cl)
 {
 	int		fd;
 
-	if ((fd = open("./kernels/render.cl", O_RDONLY)) < 0 || read(fd, 0, 0) < 0)
+	if ((fd = open("./kernels/kernel.cl", O_RDONLY)) < 0 || read(fd, 0, 0) < 0)
 	{
 		close(fd);
-		print_error("[-] Failed to load kernel from file.", 1);
+		print_error("[-] Failed to load kernel from file.", 1000);
 	}
 	cl->cl_sys.kernel_file = (char*)malloc(1000);
 	cl->cl_sys.size_kernel = read(fd, cl->cl_sys.kernel_file, 1000);
@@ -29,14 +29,14 @@ static void	load_kernel(t_cl *cl)
 
 void				init_cl(t_cl *cl)
 {
-	// cl_platform_id	platform_id;
-	// cl_uint			num_platforms;
+	cl_platform_id	platform_id;
+	cl_uint			num_platforms;
 	cl_device_id	device_id;
 	cl_uint			num_devices;
 	cl_int			ret;
 
-	// ret = clGetPlatformIDs(1, &platform_id, &num_platforms);
-	ret = clGetDeviceIDs(NULL, CL_DEVICE_TYPE_GPU, 1, &device_id,
+	ret = clGetPlatformIDs(1, &platform_id, &num_platforms);
+	ret = clGetDeviceIDs(NULL, CL_DEVICE_TYPE_ALL, 1, &device_id,
 		&num_devices);
 	cl->cl_sys.context = clCreateContext(NULL, 1, &device_id,
 		NULL, NULL, &ret);

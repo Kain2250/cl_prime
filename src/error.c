@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:26:20 by cwing             #+#    #+#             */
-/*   Updated: 2020/12/06 22:27:31 by cwing            ###   ########.fr       */
+/*   Updated: 2020/12/06 23:38:30 by kain2250         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ void		cl_err(int code)
 		return ;
 	else if (code == CL_INVALID_CONTEXT)
 		print_error("CL: Invalid context", 0);
-	else if (CL_INVALID_PLATFORM)
+	else if (code == CL_INVALID_PLATFORM)
 		print_error("CL: Invalid platform", 0);
-	else if (CL_INVALID_VALUE)
+	else if (code == CL_INVALID_VALUE)
 		print_error("CL: Invalid value", 0);
-	else if (CL_INVALID_DEVICE)
+	else if (code == CL_INVALID_DEVICE)
 		print_error("CL: Invalid device", 0);
-	else if (CL_DEVICE_NOT_FOUND)
+	else if (code == CL_DEVICE_NOT_FOUND)
 		print_error("CL: Device not found", 0);
-	else if (CL_OUT_OF_HOST_MEMORY)
+	else if (code == CL_OUT_OF_HOST_MEMORY)
 		print_error("CL: Out of host memory", 0);
-	else if (CL_OUT_OF_RESOURCES)
+	else if (code == CL_OUT_OF_RESOURCES)
 		print_error("CL: Out of resources", 0);
 	else
 		print_error("CL: Xz wtf error", 0);
