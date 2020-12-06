@@ -6,14 +6,19 @@
 /*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:52:35 by kain2250          #+#    #+#             */
-/*   Updated: 2020/12/06 19:27:43 by cwing            ###   ########.fr       */
+/*   Updated: 2020/12/06 19:33:49 by cwing            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-# include <CL/cl.h>
+# ifdef __APPLE__
+#  include <OpenCL/opencl.h>
+# else
+#  include <CL/cl.h>
+# endif
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -41,6 +46,6 @@ typedef struct			s_cl
 void					init_cl(t_cl *cl);
 
 
-void					err_out(char *message, int code);
+void					cl_err(int code);
 
 #endif
