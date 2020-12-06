@@ -6,7 +6,7 @@
 /*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:26:20 by cwing             #+#    #+#             */
-/*   Updated: 2020/12/06 20:57:17 by cwing            ###   ########.fr       */
+/*   Updated: 2020/12/06 22:27:31 by cwing            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		cl_err(int code)
 		print_error("CL: Invalid value", 0);
 	else if (CL_INVALID_DEVICE)
 		print_error("CL: Invalid device", 0);
+	else if (CL_DEVICE_NOT_FOUND)
+		print_error("CL: Device not found", 0);
 	else if (CL_OUT_OF_HOST_MEMORY)
 		print_error("CL: Out of host memory", 0);
 	else if (CL_OUT_OF_RESOURCES)
