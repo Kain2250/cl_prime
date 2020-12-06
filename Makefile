@@ -6,29 +6,30 @@
 #    By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 17:56:24 by kain2250          #+#    #+#              #
-#    Updated: 2020/12/06 20:26:02 by kain2250         ###   ########.fr        #
+#    Updated: 2020/12/06 20:38:29 by kain2250         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cl_prime
 CC = clang
 FLAGS_GISTAPO = -Wall -Wextra -Werror
-FLAGS = $(LIB_FLAGS) #$(FLAGS_GISTAPO)
+FLAGS = #$(FLAGS_GISTAPO)
 LIB_FLAGS = -lOpenCL -lft
 
 LIBFT_DIR = libft
-LIBFT_INCLUDE_DIR = $(LIBFT_DIR)/include
+LIBFT_INCLUDE_DIR = $(LIBFT_DIR)/includes
 LIBS = -L $(LIBFT_DIR)
 
 INCLUDE_DIR = include/
 INCLUDE_LIST = main.h
 
 HEADERS = $(addprefix $(INCLUDE_DIR), $(INCLUDE_LIST))
-INCLUDES = -I $(INCLUDE_DIR) -I $(LIB_INCLUDE_DIR)
+INCLUDES = -I $(INCLUDE_DIR) -I $(LIBFT_INCLUDE_DIR)
 
 SRC_DIR = src/
 SRC_LIST = main.c \
-		init.c
+		init.c \
+		error.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -40,15 +41,15 @@ OBJS = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
 all: $(NAME) 
 
-$(NAME): #$(OBJ_DIR) $(OBJS)
+$(NAME): $(HEADERS) $(SRC) #$(OBJ_DIR) $(OBJS) 
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(CC) $(FLAGS) $(SRC) $(INCLUDES) $(LIBS) -o $(NAME)
+	$(CC) $(FLAGS) $(SRC) $(INCLUDES) $(LIBS) $(LIB_FLAGS) -o $(NAME)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+# $(OBJ_DIR):
+# 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
-	@$(CC) $(FLAGS) $(INCLUDES) $< -o $@
+# $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
+# 	@$(CC) $(FLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)

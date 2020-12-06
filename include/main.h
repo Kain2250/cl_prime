@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwing <cwing@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:52:35 by kain2250          #+#    #+#             */
-/*   Updated: 2020/12/06 19:33:49 by cwing            ###   ########.fr       */
+/*   Updated: 2020/12/06 20:35:29 by kain2250         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 #  include <CL/cl.h>
 # endif
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/fcntl.h>
+# include "libft.h"
 
 typedef struct			s_cl_sys
 {
