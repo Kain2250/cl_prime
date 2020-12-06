@@ -1,2 +1,3 @@
 cl_prime
 *.o
+*.a

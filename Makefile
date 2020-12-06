@@ -3,38 +3,37 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cwing <cwing@student.42.fr>                +#+  +:+       +#+         #
+#    By: kain2250 <kain2250@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 17:56:24 by kain2250          #+#    #+#              #
-#    Updated: 2020/12/06 21:17:19 by cwing            ###   ########.fr        #
+#    Updated: 2020/12/06 21:42:08 by kain2250         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cl_prime
 
-CC = gcc
-CCFLAGS = -Wall -Wextra -g
+CC = clang
+CCFLAGS = -Wall -Wextra
 FLAGS = -O3
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
-MINILIBX_DIRECTORY = /Library/minilibx_mac
-LIBFT_DIRECTORY = ./libft/
-LIBFT_FLAGS = -lft -L$(LIBFT_DIRECTORY)
+LIBFT_DIRECTORY = libft/
+LIBFT_FLAGS = -L $(LIBFT_DIRECTORY) -lft
 
-INCLUDES_DIRECTORY = ./includes/
+INCLUDES_DIRECTORY = include/
 INCLUDES_DIRECTORY_LIBFT = $(LIBFT_DIRECTORY)includes/
 INCLUDES = -I $(INCLUDES_DIRECTORY) -I $(INCLUDES_DIRECTORY_LIBFT)
 HEADERS = $(addprefix $(INCLUDES_DIRECTORY), $(HEADERS_LIST))
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	LIB_FLAGS += -lOpenCL
+	CL_FLAGS += -lOpenCL
 endif
 ifeq ($(UNAME_S),Darwin)
-	LIB_FLAGS += -framework OpenCL
+	CL_FLAGS += -framework OpenCL
 endif
 
-ALL_FLAGS = $(LIB_FLAGS) $(LIBFT_FLAGS) $(CCFLAGS)
+ALL_FLAGS = $(CL_FLAGS) $(LIBFT_FLAGS) $(CCFLAGS)
 
 HEADERS_LIST = main.h
 
@@ -45,8 +44,8 @@ SRC_LIST = error.c \
 SRC = $(addprefix $(SRC_DIRECTORY), $(SRC_LIST))
 
 OBJ_DIR = objects/
-OBJECTS = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 OBJ_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
+OBJECTS = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
 GREEN = \033[0;32;1m
 RED = \033[0;31;1m
@@ -56,17 +55,17 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJECTS)
-	@$(CC) $(CCFLAGS) $(FLAGS) $(OBJECTS) -o $(NAME) $(ALL_FLAGS) $(INCLUDES)
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJECTS) 
+	@$(CC) $(OBJECTS) $(INCLUDES) $(ALL_FLAGS) -o $(NAME)
 	@printf "$(GREEN)[$(NAME)] Make executable file $(NAME) successfuly! [OK]\n$(RESET)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@printf "$(GREEN)[$(NAME)] Make object directory\n$(RESET)"
 
-$(OBJ_DIR)%.o : $(SRC_DIRECTORY)%.c $(HEADERS)
+$(OBJ_DIR)%.o: $(SRC_DIRECTORY)%.c $(HEADERS)
 	@printf "$(RED)[$(NAME)] Compiling [...]\r$(RESET)"
-	@$(CC) $(CCFLAGS) $(FLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) -c $(CCFLAGS) $(FLAGS) $(INCLUDES)  $< -o $@
 	@printf "$(GREEN)[$(NAME)] Compiling [$@]\n$(RESET)"
 
 $(LIBFT):
